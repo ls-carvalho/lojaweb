@@ -10,11 +10,15 @@
         $produtoDao = new ProdutoDAO();
         $produtoDao->incluirProduto($novoProduto);
         header('Location:controlerProduto.php?opcao=2');
-    }else if($opcao == 2){
+    }else if($opcao == 2 || $opcao == 6){
         $produtoDao = new ProdutoDAO();
         session_start();
         $_SESSION['produtos'] = $produtoDao->getProdutos();
-        header('Location:../views/exibirProdutos.php');
+        if($opcao == 2){
+            header('Location:../views/exibirProdutos.php');
+        }else{ //opcao == 6
+            header('Location:../views/produtosVenda.php');
+        }
     }else if($opcao == 3){
         $id = (int)$_REQUEST['id'];
         $produtoDao = new ProdutoDAO();

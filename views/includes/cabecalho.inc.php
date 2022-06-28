@@ -25,13 +25,13 @@
             <ul>
                   <li><a href="../controlers/controlerFabricante.php?opcao=2">Cadastrar</a></li>
                   <li><a href="#">Cadastrar Vários</a>
-                  <li><a href="../controlers/controlerProduto.php?opcao=2">Consultar Todos</a>
+                  <li><a href="../controlers/controlerFabricante.php?opcao=4">Consultar Todos</a>
                   <li><a href="#">Paginação</a>
             </ul>
       </li>
       <li><a href="#">Vendas</a>
               <ul>
-                      <li><a href="#">Relação de produtos</a></li>
+                      <li><a href="../controlers/controlerFabricante.php?opcao=5">Relação de produtos</a></li>
                       <li><a href="#">Ver carrinho</a></li>
                       <li><a href="#">Esvaziar carrinho</a></li>
               </ul>
