@@ -13,16 +13,18 @@
 ?>
         <table border="0" width="30%" cellspacing="10">
             <tr>
-                <td rowspan="5" align="center"><img src="imagens/produtos/<?php echo $produto->get_referencia();?>.jpg" width="200"></td>
+                <td rowspan="5" align="center">
+                    <img src="imagens/produtos/<?php echo $produto->get_referencia();?>.jpg" width="200" height="200" border="0">
+                </td>
             </tr>
             <tr align="left">
-                <td colspan="2"><?php echo $produto->get_nome();?></td>
+                <font face="Verdana" size="3"><td colspan="2"><b><?php echo $produto->get_nome();?></b></td></font>
             </tr>
             <tr>
-                <td style="text-align:justify" colspan="2"><?php echo $produto->get_descricao();?></td>
+                <td style="text-align:justify" colspan="2"><font face="Verdana" size="2"><?php echo $produto->get_descricao();?></font></td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="2"><font face="Verdana" size="2">
                     <?php
                         foreach($fabricantes as $fabricante){
                             if($produto->get_cod_fabricante() == $fabricante->codigo){
@@ -30,13 +32,16 @@
                             }
                         }
                     ?>
-                </td>
+                </font></td>
             </tr>
             <tr>
-                <td><?php echo $produto->get_preco();?></td>
-                <td colspan="2"><img src="imagens/botao_comprar2.png"></td>
+                <td><font face="Verdana" size="3" color="red"><b><font color="black">Valor: </font><?php echo $produto->get_preco();?></b></font></td>
+                <td colspan="2"><?php echo '<a href="../controlers/controlerCarrinho.php?opcao=1&id='.$produto->get_produto_id().'"><img src="imagens/botao_comprar2.png" border="0"></a>'?></td>
             </tr>
         </table>
+        <p>
+        <hr width="30%">
+        <p>
 <?php
     }
 ?>

@@ -33,7 +33,7 @@
                 echo "<td>". $produto->get_nome() ."</td>";
                 echo "<td>". $produto->get_descricao() ."</td>";
                 echo "<td>". formatarData($produto->get_data_fabricacao()) ."</td>";
-                echo "<td>". $produto->get_preco() ."</td>";
+                echo "<td> R$ ". $produto->get_preco() ."</td>";
                 echo "<td>". $produto->get_estoque() ."</td>";
                 foreach($fabricantes as $fabricante){
                     if($produto->get_cod_fabricante() == $fabricante->codigo){
