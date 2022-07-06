@@ -15,7 +15,23 @@
             $carrinho = $_SESSION['carrinho'];
         }
         $carrinho[] = $produto;
+        sort($carrinho);
         $_SESSION['carrinho'] = $carrinho;
         header('Location:../views/exibirCarrinho.php');
+    }else if($opcao==2){ //remover do carrinho
+        $index = (int)$_REQUEST['index'];
+        session_start();
+        $carrinho = $_SESSION['carrinho'];
+        unset($carrinho[$index]);
+        sort($carrinho);
+        $_SESSION['carrinho'] = $carrinho;
+        header("Location:controlerCarrinho.php?opcao=3");
+    }else if($opcao==3){ //verifica se o carrinho existe
+        session_start();
+        if(!isset($_SESSION['carrinho'])||sizeof($_SESSION['carrinho'])==0){
+            header("Location:../views/exibirCarrinho.php?status=1");
+        }else{
+            header("Location:../views/exibirCarrinho.php");
+        }
     }
 ?>

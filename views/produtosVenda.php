@@ -6,8 +6,11 @@
     $fabricantes = $_SESSION['fabricantes'];
 ?>
     <div class="corpo" align="center" style="line-height: 3em;">
-        <h1>Produtos cadastrados</h1>
+        <h1>Relação de Produtos</h1>
         <p>
+        <div class='carrinho' align='right'>
+            <a href="../controlers/controlerCarrinho.php?opcao=3"><img src="imagens/meu-carrinho.png"></a>
+        </div>
 <?php
     foreach($produtos as $produto){
 ?>
