@@ -1,6 +1,7 @@
 <?php
 require_once '../classes/produto.inc.php';
 require_once '../views/includes/cabecalho.inc.php';
+require_once '../dao/fabricanteDAO.inc.php';
 ?>
 <div class="corpo" align="center" style="line-height: 3cm;">
     <h1>Carrinho de Compras</h1>
@@ -13,6 +14,7 @@ require_once '../views/includes/cabecalho.inc.php';
             $carrinho = $_SESSION['carrinho'];
             $contador = 0;
             $total = 0;
+            $fabricanteDao = new FabricanteDAO();
         ?>
             <font face="Tahoma">
                 <table border="1" cellspacing="2" cellpadding="1" width="50%">
@@ -33,7 +35,7 @@ require_once '../views/includes/cabecalho.inc.php';
                         echo "<td>" . $contador . "</td>";
                         echo "<td>" . $produto->get_produto_id() . "</td>";
                         echo "<td>" . $produto->get_nome() . "</td>";
-                        echo "<td>" . $produto->get_cod_fabricante() . "</td>";
+                        echo "<td>" . $fabricanteDao->getFabricante($produto->get_cod_fabricante()) . "</td>";
                         echo "<td> R$ " . $produto->get_preco() . "</td>";
                         echo "<td><a href='../controlers/controlerCarrinho.php?opcao=2&id=" . ($contador - 1) . "'><img src='imagens/rem3.jpg'></a></td>";
                         echo "</tr>";
@@ -47,7 +49,7 @@ require_once '../views/includes/cabecalho.inc.php';
             </font>
         <?php
             echo "<a href='produtosVenda.php'><img src='imagens/botao_continuar_comprando.png'></a>";
-            echo "<a href='" . "'><img src='imagens/finalizarCompra.png'></a>";
+            echo "<a href='../controlers/controlerCarrinho.php?opcao=4&total=" . $total . "'><img src='imagens/finalizarCompra.png'></a>";
         }
         ?>
 </div>

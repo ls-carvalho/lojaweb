@@ -1,7 +1,8 @@
 <?php
 require_once 'conexao.inc.php';
 
-class FabricanteDAO{
+class FabricanteDAO
+{
     private $con;
 
     function __construct()
@@ -10,13 +11,25 @@ class FabricanteDAO{
         ($this)->con = $conexao->getConexao();
     }
 
-    public function getFabricantes(){
+    public function getFabricantes()
+    {
         $sql = ($this)->con->query("SELECT * FROM lojaweb.fabricantes;");
         $fabricantes = array();
-        while($f = $sql->fetch(PDO::FETCH_OBJ)){
+        while ($f = $sql->fetch(PDO::FETCH_OBJ)) {
             $fabricantes[] = $f;
         }
         return $fabricantes;
     }
+
+    public function getFabricante($id)
+    {
+        $sql = $this->con->prepare("SELECT nome FROM fabricantes where codigo = :id");
+
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+
+        $fab = $sql->fetch(PDO::FETCH_OBJ);
+
+        return $fab->nome;
+    }
 }
-?>
