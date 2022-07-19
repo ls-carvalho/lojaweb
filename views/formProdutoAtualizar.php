@@ -13,7 +13,7 @@ $fabricantes = $_SESSION['fabricantes'];
     <form action="../controlers/controlerProduto.php" method="post">
         ID: <input type="text" size="3" name="pId" value="<?php echo $produto->get_produto_id() ?>" readonly>
         <p>Nome do Produto: <input type="text" size="20" name="pNome" value="<?php echo $produto->get_nome() ?>">
-        <p>Data de Fabricação: <input type="date" name="pData" value="<?php echo formatarDataAmericano($produto->get_data_fabricacao()) ?>">
+        <p>Data de Fabricação: <input type="date" name="pData" value="<?php echo conversorData($produto->get_data_fabricacao()) ?>">
         <p>Preço: <input type="number" min="0" name="pPreco" value="<?php echo $produto->get_preco() ?>">
         <p>Quantidade em Estoque: <input type="number" min="0" name="pEstoque" value="<?php echo $produto->get_estoque() ?>">
         <p>Descrição: <input type="text" size="20" name="pDescricao" value="<?php echo $produto->get_descricao() ?>">

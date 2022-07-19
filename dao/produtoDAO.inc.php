@@ -2,6 +2,7 @@
 require_once '../classes/produto.inc.php';
 require_once 'conexao.inc.php';
 require_once 'fabricanteDAO.inc.php';
+require_once '../utils/dataUtil.inc.php';
 
 class ProdutoDAO
 {
@@ -17,7 +18,7 @@ class ProdutoDAO
     {
         $sql = ($this)->con->prepare("INSERT INTO lojaweb.produtos(nome, data_fabricacao, preco, estoque, descricao, referencia, cod_fabricante) VALUES (:nome, :data_fabricacao, :preco, :estoque, :descricao, :referencia, :cod_fabricante)");
         $sql->bindValue(":nome", $produto->get_nome());
-        $sql->bindValue(":data_fabricacao", ($this)->conversorData($produto->get_data_fabricacao()));
+        $sql->bindValue(":data_fabricacao", conversorData($produto->get_data_fabricacao()));
         $sql->bindValue(":preco", $produto->get_preco());
         $sql->bindValue(":estoque", $produto->get_estoque());
         $sql->bindValue(":descricao", $produto->get_descricao());
@@ -25,11 +26,6 @@ class ProdutoDAO
         $sql->bindValue(":estoque", $produto->get_estoque());
         $sql->bindValue(":cod_fabricante", $produto->get_cod_fabricante());
         $sql->execute();
-    }
-
-    private function conversorData($data)
-    {
-        return date('Y-m-d', $data);
     }
 
     public function getProdutos()
@@ -82,7 +78,7 @@ class ProdutoDAO
             produto_id = :produto_id"
         );
         $sql->bindValue(":nome", $produto->get_nome());
-        $sql->bindValue(":data_fabricacao", ($this)->conversorData($produto->get_data_fabricacao()));
+        $sql->bindValue(":data_fabricacao", conversorData($produto->get_data_fabricacao()));
         $sql->bindValue(":preco", $produto->get_preco());
         $sql->bindValue(":estoque", $produto->get_estoque());
         $sql->bindValue(":descricao", $produto->get_descricao());
