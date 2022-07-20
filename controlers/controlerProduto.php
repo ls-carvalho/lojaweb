@@ -62,4 +62,16 @@ if ($opcao == 1) { //inclusão
     $produtoDao = new ProdutoDAO();
     $produtoDao->atualizarProduto($produto);
     header('Location:controlerProduto.php?opcao=2');
+} else if ($opcao == 7) {
+    $pagina = (int)$_REQUEST['pagina'];
+    $produtoDao = new ProdutoDAO();
+    $lista = $produtoDao->getProdutosPaginacao($pagina);
+    $numPaginas = $produtoDao->getPagina();
+    session_start();
+    $_SESSION['produtos'] = $lista;
+    header("Location:../views/exibirProdutosPaginacao.php?paginas=" . $numPaginas);
+} else if ($opcao == 8) {
+    $produtoDao = new ProdutoDAO();
+    $produtoDao->incluirVariosProdutos();
+    header("Location:controlerProduto.php?opcao=2");
 }
