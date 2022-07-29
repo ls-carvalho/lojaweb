@@ -2,15 +2,13 @@
 class Venda
 {
     private $id_venda;
-    private $cpf;
+    private $id_cliente;
     private $valorTotal;
-    private $data;
 
-    function __construct($cpf, $valor)
+    function __construct($id_cliente, $valor)
     {
-        ($this)->cpf = $cpf;
+        ($this)->id_cliente = $id_cliente;
         ($this)->valorTotal = $valor;
-        ($this)->data = time();
     }
 
     public function get_id_venda()
@@ -23,14 +21,14 @@ class Venda
         ($this)->id_venda = $novo_id;
     }
 
-    public function get_cpf()
+    public function get_id_cliente()
     {
-        return ($this)->cpf;
+        return ($this)->id_cliente;
     }
 
-    public function set_cpf($novo_cpf)
+    public function set_id_cliente($novo_id_cliente)
     {
-        ($this)->cpf = $novo_cpf;
+        ($this)->id_cliente = $novo_id_cliente;
     }
 
     public function get_valorTotal()
@@ -41,15 +39,5 @@ class Venda
     public function set_valorTotal($novo_valorTotal)
     {
         ($this)->valorTotal = $novo_valorTotal;
-    }
-
-    public function get_data()
-    {
-        return ($this)->data;
-    }
-
-    public function set_data($nova_data)
-    {
-        ($this)->data = $nova_data;
     }
 }

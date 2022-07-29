@@ -1,5 +1,7 @@
 <?php
 require_once 'conexao.inc.php';
+require_once '../classes/cliente.inc.php';
+require_once '../utils/dataUtil.inc.php';
 
 class ClienteDAO
 {
@@ -24,5 +26,19 @@ class ClienteDAO
         } else {
             return NULL;
         }
+    }
+
+    function incluirCliente(Cliente $cliente){
+        $sql = ($this)->con->prepare("INSERT INTO `clientes` (`cod_cliente`, `nome`, `endereco`, `telefone`, `cpf`, `dt_nascimento`, `email`, `senha`) 
+        VALUES (:cod, :nome, :endereco, :tel, :cpf, :dt, :email, :senha);");
+        $sql->bindValue(':cod', $cliente->get_cod_cliente());
+        $sql->bindValue(':nome', $cliente->get_nome());
+        $sql->bindValue(':endereco', $cliente->get_endereco());
+        $sql->bindValue(':tel', $cliente->get_telefone());
+        $sql->bindValue(':cpf', $cliente->get_cpf());
+        $sql->bindValue(':dt', conversorData($cliente->get_dt_nascimento()));
+        $sql->bindValue(':email', $cliente->get_email());
+        $sql->bindValue(':senha', $cliente->get_senha());
+        $sql->execute();
     }
 }
