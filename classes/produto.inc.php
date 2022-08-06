@@ -1,14 +1,14 @@
 <?php
 class Produto
 {
-    private $produto_id; //mudar pra produto_id
-    private $nome;
-    private $data_fabricacao;
-    private $preco;
-    private $estoque;
-    private $descricao;
-    private $referencia;
-    private $cod_fabricante;
+    protected $produto_id; //mudar pra produto_id
+    protected $nome;
+    protected $data_fabricacao;
+    protected $preco;
+    protected $estoque;
+    protected $descricao;
+    protected $referencia;
+    protected $cod_fabricante;
 
     //metodo para setar todos os valores
     function setAll(

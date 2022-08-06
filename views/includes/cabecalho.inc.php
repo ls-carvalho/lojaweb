@@ -35,7 +35,7 @@
                                         <ul>
                                                 <li><a href="../controlers/controlerFabricante.php?opcao=5">Relação de produtos</a></li>
                                                 <li><a href="../controlers/controlerCarrinho.php?opcao=3">Ver carrinho</a></li>
-                                                <li><a href="#">Esvaziar carrinho</a></li>
+                                                <li><a href="../controlers/controlerCarrinho.php?opcao=6">Esvaziar carrinho</a></li>
                                         </ul>
                                 </li>
                                 <li><a href="contato.php">Contato</a></li>

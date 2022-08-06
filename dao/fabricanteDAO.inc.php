@@ -26,10 +26,7 @@ class FabricanteDAO
         $sql = ($this)->con->prepare("SELECT nome FROM fabricantes WHERE codigo = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
-
         $fab = $sql->fetch(PDO::FETCH_OBJ);
-
-        //var_dump($fab);
         return $fab->nome;
     }
 }

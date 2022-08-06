@@ -18,7 +18,7 @@ class VendaDAO
     {
         $sql = ($this)->con->prepare('INSERT INTO vendas (cpf_cliente, dataVenda, valorTotal) VALUES (:cpf, :dt, :vt)');
         $sql->bindValue(':cpf', $venda->get_cpf());
-        $sql->bindValue(':dt', $venda->get_data());
+        $sql->bindValue(':dt', conversorData($venda->get_data()));
         $sql->bindValue(':vt', $venda->get_valorTotal());
         $sql->execute();
         $id = ($this)->getIdVenda();

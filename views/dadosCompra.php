@@ -2,6 +2,7 @@
 require_once '../classes/produto.inc.php';
 require_once '../views/includes/cabecalho.inc.php';
 require_once '../dao/fabricanteDAO.inc.php';
+require_once '../classes/produtoCarrinho.inc.php';
 ?>
 <div class="corpo" align="center" style="line-height: 3cm;">
     <h1>Finalizar Compra</h1>
@@ -32,6 +33,8 @@ require_once '../dao/fabricanteDAO.inc.php';
                 <th>Nome</th>
                 <th>Fabricante</th>
                 <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
             </tr>
             <?php
             foreach ($carrinho as $produto) {
@@ -42,11 +45,13 @@ require_once '../dao/fabricanteDAO.inc.php';
                 echo "<td>" . $produto->get_nome() . "</td>";
                 echo "<td>" . $fabricanteDao->getFabricante($produto->get_cod_fabricante()) . "</td>";
                 echo "<td> R$ " . $produto->get_preco() . "</td>";
+                echo "<td>" . $produto->get_quantidade() . "</td>";
+                echo "<td> R$ " . $produto->get_preco() * $produto->get_quantidade() . "</td>";
                 echo "</tr>";
             }
             echo "<tr align='center'>";
             echo "<td><font color='black'><b>Total<b></font></td>";
-            echo "<td colspan='4' align='right'><font color='red'><b> R$ " . $total . "</b></font></td>";
+            echo "<td colspan='6' align='right'><font color='red'><b> R$ " . $total . "</b></font></td>";
             echo "</tr>";
             ?>
         </table>
