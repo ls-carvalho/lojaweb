@@ -1,10 +1,8 @@
 <?php
-require_once 'includes/cabecalho.inc.php';
+require_once 'includes/autenticarMenu.inc.php';
 require_once '../classes/produto.inc.php';
 require_once '../dao/fabricanteDAO.inc.php';
-session_start();
 $produtos = $_SESSION['produtos'];
-//$fabricantes = $_SESSION['fabricantes'];
 $fabricanteDao = new FabricanteDAO();
 ?>
 <div class="corpo" align="center" style="line-height: 3em;">
@@ -37,11 +35,6 @@ $fabricanteDao = new FabricanteDAO();
                     <font face="Verdana" size="2">
                         <?php
                         echo $fabricanteDao->getFabricante($produto->get_cod_fabricante());
-                        /*foreach($fabricantes as $fabricante){
-                            if($produto->get_cod_fabricante() == $fabricante->codigo){
-                                echo $fabricante->nome;
-                            }
-                        }*/
                         ?>
                     </font>
                 </td>

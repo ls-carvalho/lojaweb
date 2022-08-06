@@ -13,4 +13,34 @@ if ($opcao == 1) { //inclusão
     session_start();
     $_SESSION['cliente'] = $novoCliente;
     header('Location:../views/formClienteLogin.php');
+} else if ($opcao == 2) { //atualizar
+    $cliente = new Cliente();
+    $cliente->setAll($_REQUEST['pNome'], $_REQUEST['pLogradouro'], $_REQUEST['pCidade'], $_REQUEST['pEstado'], $_REQUEST['pCep'], $_REQUEST['pTelefone'], $_REQUEST['pData'], $_REQUEST['pEmail'], $_REQUEST['pSenha'], $_REQUEST['pRg']);
+    $cliente->set_cpf($_REQUEST['pCpf']);
+    $clienteDao = new ClienteDAO();
+    $clienteDao->atualizarCliente($cliente);
+    session_start();
+    $_SESSION['cliente'] = $cliente;
+    header('Location:controlerCliente.php?opcao=3');
+} else if ($opcao == 3) { // exibir dados cadastrais
+    session_start();
+    if (isset($_SESSION['cliente'])) {
+        header('Location:../views/exibirClienteDadosCadastral.php');
+    } else {
+        header('Location:../views/formClienteLogin.php');
+    }
+} else if ($opcao == 4) { //excluir
+    session_start();
+    if (isset($_SESSION['cliente'])) {
+        $clienteDao->excluirCliente($_SESSION['cliente']);
+        header('Location:controlerCliente.php?opcao=5');
+    } else {
+        header('Location:../views/formClienteLogin.php');
+    }
+} else if ($opcao == 5) { //deslogar
+    session_start();
+    if (isset($_SESSION['cliente'])) {
+        unset($_SESSION['cliente']);
+    }
+    header('Location:../views/formClienteLogin.php');
 }

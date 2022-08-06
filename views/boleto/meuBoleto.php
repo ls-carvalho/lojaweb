@@ -1,7 +1,9 @@
 <?php
 
 require 'autoloader.php';
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $cliente = $_SESSION['cliente'];
 $total = $_SESSION['total'];
 

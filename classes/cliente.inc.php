@@ -12,6 +12,7 @@ class Cliente
     protected $email;
     protected $senha;
     protected $rg;
+    protected $data_exclusao;
 
     //metodo para setar todos os valores
     function setAll(
@@ -147,5 +148,15 @@ class Cliente
     function set_rg($novo_rg)
     {
         ($this)->rg = $novo_rg;
+    }
+
+    function get_data_exclusao()
+    {
+        return ($this)->data_exclusao;
+    }
+
+    function set_data_exclusao($nova_data_exclusao)
+    {
+        ($this)->data_exclusao = $nova_data_exclusao;
     }
 }

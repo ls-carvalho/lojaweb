@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/cabecalho.inc.php';
+require_once 'includes/autenticarMenu.inc.php';
 ?>
 <div class="corpo" align="center" style="line-height: 3em;">
     <h2>Cadastro do Cliente</h2>

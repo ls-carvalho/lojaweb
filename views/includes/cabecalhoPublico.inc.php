@@ -17,24 +17,10 @@
                         <ul class="menu">
                                 <li><a href="index.php">Home</a></li>
                                 <li><a href="#">Quem somos?</a></li>
-                                <li><a href="#">Clientes</a>
+                                <li><a href="../views/controlerCliente.php?opcao=3">Area do Cliente</a>
                                         <ul>
-                                                <li><a href="#">Cadastrar</a></li>
-                                                <li><a href="#">Consultar Todos</a></li>
-                                        </ul>
-                                </li>
-                                <li><a href="../controlers/controlerFabricante.php?opcao=9">Fabricantes</a>
-                                        <ul>
-                                                <li><a href="../views/formFabricante.php">Cadastrar</a></li>
-                                                <li><a href="../controlers/controlerFabricante.php?opcao=9">Consultar Todos</a></li>
-                                        </ul>
-                                </li>
-                                <li><a href="../controlers/controlerFabricante.php?opcao=4">Produtos</a>
-                                        <ul>
-                                                <li><a href="../controlers/controlerFabricante.php?opcao=2">Cadastrar</a></li>
-                                                <li><a href="../controlers/controlerProduto.php?opcao=8">Cadastrar Vários</a>
-                                                <li><a href="../controlers/controlerFabricante.php?opcao=4">Consultar Todos</a>
-                                                <li><a href="../controlers/controlerFabricante.php?opcao=6">Consultar Paginação</a>
+                                                <li><a href="../views/controlerCliente.php?opcao=3">Dados Cadastrais</a></li>
+                                                <li><a href="../views/formClienteAtualizar.php">Alterar Dados Cadastrais</a></li>
                                         </ul>
                                 </li>
                                 <li><a href="../controlers/controlerFabricante.php?opcao=5">Vendas</a>

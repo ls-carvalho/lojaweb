@@ -1,22 +1,17 @@
 <?php
+require_once 'includes/autenticar.inc.php';
+require_once 'includes/autenticarMenu.inc.php';
 require_once '../classes/produto.inc.php';
-require_once '../views/includes/cabecalho.inc.php';
 require_once '../dao/fabricanteDAO.inc.php';
 require_once '../classes/produtoCarrinho.inc.php';
+$cliente = $_SESSION['cliente'];
+$carrinho = $_SESSION['carrinho'];
+$total = $_SESSION['total'];
+$fabricanteDao = new FabricanteDAO();
 ?>
 <div class="corpo" align="center" style="line-height: 3cm;">
     <h1>Finalizar Compra</h1>
     <p>
-        <?php
-        session_start();
-        if (!isset($_SESSION['cliente'])) {
-            echo "<h2><b>Carrinho vazio!</b></h2>";
-        } else {
-            $cliente = $_SESSION['cliente'];
-            $carrinho = $_SESSION['carrinho'];
-            $total = $_SESSION['total'];
-            $fabricanteDao = new FabricanteDAO();
-        ?>
     <div style="line-height: 1cm;">
         <p>Nome: <?php echo $cliente->nome ?>
         <p>CPF: <?php echo $cliente->cpf ?>
@@ -59,9 +54,6 @@ require_once '../classes/produtoCarrinho.inc.php';
     <form action="dadosPagamento.php">
         <input type="submit" value="Proximo>>>">
     </form>
-<?php
-        }
-?>
 </div>
 <?php
 require_once '../views/includes/rodape.inc.php';

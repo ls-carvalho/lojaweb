@@ -1,13 +1,12 @@
 <?php
-require_once 'includes/cabecalho.inc.php';
+require_once 'includes/autenticarMenu.inc.php';
 ?>
 <div class="corpo" align="center" style="line-height: 3em;">
     <h2>Login do Cliente</h2>
     <p>
         <?php
-        session_start();
-        if (isset($_SESSION['cliente'])) {
-            echo "<p>Você já está logado! Deseja <a href='../controlers/controlerClienteLogin.php?opcao=3'>sair</a>?";
+        if (isset($_SESSION['logado'])) {
+            echo "<p>Você já está logado! Deseja <a href='../controlers/controlerLogin.php?opcao=1'>sair</a>?";
         } else {
         ?>
     <form action="../controlers/controlerClienteLogin.php" method="get">

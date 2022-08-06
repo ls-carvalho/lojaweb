@@ -1,10 +1,9 @@
 <?php
-require_once 'includes/cabecalho.inc.php';
-require_once '../classes/produto.inc.php';
 require_once 'includes/autenticar.inc.php';
+require_once 'includes/autenticarRestrito.inc.php';
+require_once '../classes/produto.inc.php';
 require_once '../utils/dataUtil.inc.php';
 require_once '../dao/fabricanteDAO.inc.php';
-//session_start();
 $produtos = $_SESSION['produtos'];
 $fabricantes = $_SESSION['fabricantes'];
 $fabricanteDao = new FabricanteDAO();
@@ -35,11 +34,6 @@ $fabricanteDao = new FabricanteDAO();
                     echo "<td> R$ " . $produto->get_preco() . "</td>";
                     echo "<td>" . $produto->get_estoque() . "</td>";
                     echo "<td>" . $fabricanteDao->getFabricante($produto->get_cod_fabricante()) . "</td>";
-                    /*foreach($fabricantes as $fabricante){
-                    if($produto->get_cod_fabricante() == $fabricante->codigo){
-                        echo "<td>". $fabricante->codigo . " - " . $fabricante->nome ."</td>";
-                    }
-                }*/
                     // ultima célula da tabela
                     echo "<td><a href='../controlers/controlerProduto.php?opcao=3&id=" . $produto->get_produto_id() . "'>Alterar</a>&nbsp;";
                     echo "<a href='../controlers/controlerProduto.php?opcao=4&id=" . $produto->get_produto_id() . "'>Excluir</a></td>";

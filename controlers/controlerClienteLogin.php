@@ -11,6 +11,8 @@ if ($opcao == 1) { //login
     $cliente = $clienteDao->autenticar($email, $senha);
     if ($cliente != NULL) {
         session_start();
+        $_SESSION['logado'] = true;
+        $_SESSION['tipousuario'] = '2';
         $_SESSION['cliente'] = $cliente;
         header('Location:../views/dadosCompra.php');
     } else {
@@ -18,17 +20,9 @@ if ($opcao == 1) { //login
     }
 } else if ($opcao == 2) { //Melhoria de redirecionamento
     session_start();
-    if (isset($_SESSION['cliente'])) {
+    if (isset($_SESSION['cliente']) && isset($_SESSION['logado'])) {
         header('Location:../views/dadosCompra.php');
     } else {
-        header('Location:../views/formClienteLogin.php?erro=2');
-    }
-} else if ($opcao == 3) { //Logout
-    session_start();
-    if(isset($_SESSION['cliente'])){
-        unset($_SESSION['cliente']);
-        header('Location:../views/formClienteLogin.php');
-    }else{
         header('Location:../views/formClienteLogin.php?erro=2');
     }
 }

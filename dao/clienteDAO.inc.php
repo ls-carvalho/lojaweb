@@ -15,10 +15,10 @@ class ClienteDAO
 
     function autenticar($email, $senha)
     {
-        $sql = ($this)->con->prepare("SELECT * FROM clientes WHERE email = :usr and senha = :pass");
+        $sql = ($this)->con->prepare("SELECT * FROM clientes WHERE email = :usr and senha = :pass and data_exclusao = null"); //adicionado condicional para cliente excluido logicamente
         $login = strtolower($email);
         $senha = strtolower($senha);
-        $sql->bindValue(':usr', $email);
+        $sql->bindValue(':usr', $login);
         $sql->bindValue(':pass', $senha);
         $sql->execute();
         if ($sql->rowCount() > 0) {
@@ -39,9 +39,15 @@ class ClienteDAO
         $sql->bindValue(":cep", $cliente->get_cep());
         $sql->bindValue(":telefone", $cliente->get_telefone());
         $sql->bindValue(":data_nascimento", conversorData($cliente->get_data_nascimento()));
-        $sql->bindValue(":email", $cliente->get_email());
-        $sql->bindValue(":senha", $cliente->get_senha());
+        $login = strtolower($cliente->get_email());
+        $senha = strtolower($cliente->get_senha());
+        $sql->bindValue(":email", $login);
+        $sql->bindValue(":senha", $senha);
         $sql->bindValue(":rg", $cliente->get_rg());
+        $sql->execute();
+        $sql = ($this)->con->prepare("INSERT INTO lojaweb.usuarios(login, senha) VALUES (:login, :senha);");
+        $sql->bindValue(":login", $login);
+        $sql->bindValue(":senha", $senha);
         $sql->execute();
     }
 
@@ -60,8 +66,14 @@ class ClienteDAO
 
     public function excluirCliente($cpf)
     {
-        $sql = ($this)->con->prepare("DELETE FROM lojaweb.clientes WHERE cpf = :cpf");
+        $cliente = ($this)->getCliente($cpf);
+        $sql = ($this)->con->prepare("UPDATE FROM lojaweb.clientes SET data_exclusao = :data_exclusao WHERE cpf = :cpf");
         $sql->bindValue(":cpf", $cpf);
+        $sql->bindValue(":data_exclusao", conversorData(time()));
+        $sql->execute();
+        $sql = ($this)->con->prepare("DELETE FROM lojaweb.usuarios WHERE login = :login AND senha = :senha);");
+        $sql->bindValue(":login", $cliente->get_email());
+        $sql->bindValue(":senha", $cliente->get_senha());
         $sql->execute();
     }
 
@@ -79,6 +91,8 @@ class ClienteDAO
 
     public function atualizarCliente(Cliente $cliente)
     {
+        session_start();
+        $antigoCliente = $_SESSION['cliente'];
         $sql = ($this)->con->prepare(
             "UPDATE 
             lojaweb.clientes 
@@ -107,6 +121,12 @@ class ClienteDAO
         $sql->bindValue(":email", $cliente->get_email());
         $sql->bindValue(":senha", $cliente->get_senha());
         $sql->bindValue(":rg", $cliente->get_rg());
+        $sql->execute();
+        $sql = ($this)->con->prepare("UPDATE lojaweb.usuarios SET login = :login, senha = :senha WHERE login = :oldlogin and senha = :oldsenha;");
+        $sql->bindValue(":login", $cliente->get_email());
+        $sql->bindValue(":senha", $cliente->get_senha());
+        $sql->bindValue(":oldlogin", $antigoCliente->get_email());
+        $sql->bindValue(":oldsenha", $antigoCliente->get_senha());
         $sql->execute();
     }
 }

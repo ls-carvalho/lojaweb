@@ -1,7 +1,6 @@
 <?php
 require_once '../classes/produto.inc.php';
 require_once 'conexao.inc.php';
-//require_once 'fabricanteDAO.inc.php';
 require_once '../utils/dataUtil.inc.php';
 
 class ProdutoDAO
@@ -83,7 +82,7 @@ class ProdutoDAO
         //$fabricanteDao = new FabricanteDAO();
         while ($p = $sql->fetch(PDO::FETCH_OBJ)) {
             $produto = new Produto();
-            $produto->setAll($p->nome,$p->data_fabricacao,$p->preco,$p->estoque,$p->descricao,$p->referencia,$p->cod_fabricante);
+            $produto->setAll($p->nome, $p->data_fabricacao, $p->preco, $p->estoque, $p->descricao, $p->referencia, $p->cod_fabricante);
             //$produto->setAll($p->nome, $p->data_fabricacao, $p->preco, $p->estoque, $p->descricao, $p->referencia, $fabricanteDao->getFabricante($p->cod_fabricante));
             $produto->set_produto_id($p->produto_id);
             $produtos[] = $produto;

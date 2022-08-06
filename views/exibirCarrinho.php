@@ -1,6 +1,6 @@
 <?php
+require_once 'includes/autenticarMenu.inc.php';
 require_once '../classes/produto.inc.php';
-require_once '../views/includes/cabecalho.inc.php';
 require_once '../dao/fabricanteDAO.inc.php';
 require_once '../classes/produtoCarrinho.inc.php';
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/cabecalho.inc.php';
+require_once 'includes/autenticarMenu.inc.php';
 ?>
 <div class="corpo" align="center" style="line-height: 3em;">
     <h2>Login do Sistema</h2>
@@ -22,6 +22,9 @@ require_once 'includes/cabecalho.inc.php';
             else
             if ((int)($_REQUEST['erro']) == "2")
                 echo "<b><font face='Verdana' size='2' color='blue'> Por favor, efetue seu login novamente.</font></b>";
+            else
+            if ((int)($_REQUEST['erro']) == "3")
+                echo "<b><font face='Verdana' size='2' color='blue'> Acesso não autorizado! Efetue seu login de administrador para prosseguir.</font></b>";
         }
         ?>
 </div>
