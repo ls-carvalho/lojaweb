@@ -45,9 +45,10 @@ class ClienteDAO
         $sql->bindValue(":senha", $senha);
         $sql->bindValue(":rg", $cliente->get_rg());
         $sql->execute();
-        $sql = ($this)->con->prepare("INSERT INTO lojaweb.usuarios(login, senha) VALUES (:login, :senha);");
+        $sql = ($this)->con->prepare("INSERT INTO lojaweb.usuarios(login, senha, tipo) VALUES (:login, :senha, :tipo);");
         $sql->bindValue(":login", $login);
         $sql->bindValue(":senha", $senha);
+        $sql->bindValue(":tipo", $tipo);
         $sql->execute();
     }
 
@@ -71,9 +72,10 @@ class ClienteDAO
         $sql->bindValue(":cpf", $cpf);
         $sql->bindValue(":data_exclusao", conversorData(time()));
         $sql->execute();
-        $sql = ($this)->con->prepare("DELETE FROM lojaweb.usuarios WHERE login = :login AND senha = :senha);");
+        $sql = ($this)->con->prepare("DELETE FROM lojaweb.usuarios WHERE login = :login AND senha = :senha AND tipo = :tipo);");
         $sql->bindValue(":login", $cliente->get_email());
         $sql->bindValue(":senha", $cliente->get_senha());
+        $sql->bindValue(":tipo", '2');
         $sql->execute();
     }
 
@@ -122,11 +124,12 @@ class ClienteDAO
         $sql->bindValue(":senha", $cliente->get_senha());
         $sql->bindValue(":rg", $cliente->get_rg());
         $sql->execute();
-        $sql = ($this)->con->prepare("UPDATE lojaweb.usuarios SET login = :login, senha = :senha WHERE login = :oldlogin and senha = :oldsenha;");
+        $sql = ($this)->con->prepare("UPDATE lojaweb.usuarios SET login = :login, senha = :senha WHERE login = :oldlogin and senha = :oldsenha AND :tipo = tipo;");
         $sql->bindValue(":login", $cliente->get_email());
         $sql->bindValue(":senha", $cliente->get_senha());
         $sql->bindValue(":oldlogin", $antigoCliente->get_email());
         $sql->bindValue(":oldsenha", $antigoCliente->get_senha());
+        $sql->bindValue(":tipo", '2');
         $sql->execute();
     }
 }
