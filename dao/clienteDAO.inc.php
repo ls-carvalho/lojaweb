@@ -48,7 +48,7 @@ class ClienteDAO
         $sql = ($this)->con->prepare("INSERT INTO lojaweb.usuarios(login, senha, tipo) VALUES (:login, :senha, :tipo);");
         $sql->bindValue(":login", $login);
         $sql->bindValue(":senha", $senha);
-        $sql->bindValue(":tipo", $tipo);
+        $sql->bindValue(":tipo", 2);
         $sql->execute();
     }
 
