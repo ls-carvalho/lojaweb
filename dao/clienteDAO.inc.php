@@ -124,7 +124,7 @@ class ClienteDAO
         $sql->bindValue(":senha", $cliente->get_senha());
         $sql->bindValue(":rg", $cliente->get_rg());
         $sql->execute();
-        $sql = ($this)->con->prepare("UPDATE lojaweb.usuarios SET login = :login, senha = :senha WHERE login = :oldlogin and senha = :oldsenha AND :tipo = tipo;");
+        $sql = ($this)->con->prepare("UPDATE lojaweb.usuarios SET login = :login, senha = :senha WHERE login = :oldlogin and senha = :oldsenha AND tipo = tipo;");
         $sql->bindValue(":login", $cliente->get_email());
         $sql->bindValue(":senha", $cliente->get_senha());
         $sql->bindValue(":oldlogin", $antigoCliente->get_email());
