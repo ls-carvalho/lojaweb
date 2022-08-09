@@ -20,32 +20,35 @@ function efetuarLogin($login, $senha)
     }
 }
 
-$tipo = $_REQUEST['pTipo'];
-$login = $_REQUEST['pLogin'];
-$senha = $_REQUEST['pSenha'];
-
-if ($tipo == "1") {
-    $logado = efetuarLogin($login, $senha);
-    if ($logado) {
-        session_start();
-        $_SESSION['logado'] = true;
-        $_SESSION['tipousuario'] = '1';
-        header('Location:../views/index.php');
-    }
-} else if ($tipo == "2") {
-    $logado = efetuarLogin($login, $senha);
-    if ($logado) {
-        session_start();
-        $_SESSION['logado'] = true;
-        $_SESSION['tipousuario'] = '2';
-        $clienteDao = new ClienteDAO();
-        $_SESSION['cliente'] = $clienteDao->autenticar($login, $senha);
-        header('Location:../views/index.php');
-    }
-}
-
 $opcao = $_REQUEST['opcao'];
-if ($opcao == 1) { //Logout
+if ($opcao == 2) {
+    $tipo = $_REQUEST['pTipo'];
+    $login = $_REQUEST['pLogin'];
+    $senha = $_REQUEST['pSenha'];
+    if ($tipo == "1") {
+        $logado = efetuarLogin($login, $senha);
+        if ($logado) {
+            session_start();
+            $_SESSION['logado'] = true;
+            $_SESSION['tipousuario'] = '1';
+            header('Location:../views/index.php');
+        } else {
+            header('Location:../views/formLogin.php?erro=1');
+        }
+    } else if ($tipo == "2") {
+        $logado = efetuarLogin($login, $senha);
+        if ($logado) {
+            session_start();
+            $_SESSION['logado'] = true;
+            $_SESSION['tipousuario'] = '2';
+            $clienteDao = new ClienteDAO();
+            $_SESSION['cliente'] = $clienteDao->autenticar($login, $senha);
+            header('Location:../views/index.php');
+        } else {
+            header('Location:../views/formLogin.php?erro=1');
+        }
+    }
+} else if ($opcao == 1) { //Logout
     session_start();
     if (isset($_SESSION['logado'])) {
         unset($_SESSION['logado']);

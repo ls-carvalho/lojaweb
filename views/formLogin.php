@@ -13,6 +13,7 @@ require_once 'includes/autenticarMenu.inc.php';
                 <option value="2">Cliente</option>
             </select>
         <p><input type="submit" value="Login"> <input type="reset" value="Cancelar">
+        <input type="hidden" name="opcao" value="2">
     </form>
     <p>
         <?php
