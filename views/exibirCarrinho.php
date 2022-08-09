@@ -11,7 +11,9 @@ require_once '../classes/produtoCarrinho.inc.php';
         if (isset($_REQUEST['status'])) {
             echo "<h2><b>Carrinho vazio!</b></h2>";
         } else {
-            session_start();
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             $carrinho = $_SESSION['carrinho'];
             $contador = 0;
             $total = 0;

@@ -6,7 +6,20 @@ $opcao = (int)$_REQUEST['opcao'];
 
 if ($opcao == 1) { //inclusão
     $novoCliente = new Cliente();
-    $novoCliente->setAll($_REQUEST['pNome'], $_REQUEST['pLogradouro'], $_REQUEST['pCidade'], $_REQUEST['pEstado'], $_REQUEST['pCep'], $_REQUEST['pTelefone'], $_REQUEST['pData'], $_REQUEST['pEmail'], $_REQUEST['pSenha'], $_REQUEST['pRg']);
+    $email = strtolower($_REQUEST['pLogin']);
+    $senha = strtolower($_REQUEST['pSenha']);
+    $novoCliente->setAll(
+        $_REQUEST['pNome'], 
+        $_REQUEST['pLogradouro'], 
+        $_REQUEST['pCidade'], 
+        $_REQUEST['pEstado'], 
+        $_REQUEST['pCep'], 
+        $_REQUEST['pTelefone'], 
+        $_REQUEST['pData'], 
+        $email, 
+        $senha, 
+        $_REQUEST['pRg']
+    );
     $novoCliente->set_cpf($_REQUEST['pCpf']);
     $clienteDao = new ClienteDAO();
     $clienteDao->incluirCliente($novoCliente);
@@ -15,7 +28,20 @@ if ($opcao == 1) { //inclusão
     header('Location:../views/formClienteLogin.php');
 } else if ($opcao == 2) { //atualizar
     $cliente = new Cliente();
-    $cliente->setAll($_REQUEST['pNome'], $_REQUEST['pLogradouro'], $_REQUEST['pCidade'], $_REQUEST['pEstado'], $_REQUEST['pCep'], $_REQUEST['pTelefone'], $_REQUEST['pData'], $_REQUEST['pEmail'], $_REQUEST['pSenha'], $_REQUEST['pRg']);
+    $email = strtolower($_REQUEST['pLogin']);
+    $senha = strtolower($_REQUEST['pSenha']);
+    $cliente->setAll(
+        $_REQUEST['pNome'], 
+        $_REQUEST['pLogradouro'], 
+        $_REQUEST['pCidade'], 
+        $_REQUEST['pEstado'], 
+        $_REQUEST['pCep'], 
+        $_REQUEST['pTelefone'], 
+        $_REQUEST['pData'], 
+        $email, 
+        $senha,
+        $_REQUEST['pRg']
+    );
     $cliente->set_cpf($_REQUEST['pCpf']);
     $clienteDao = new ClienteDAO();
     $clienteDao->atualizarCliente($cliente);
@@ -40,6 +66,8 @@ if ($opcao == 1) { //inclusão
 } else if ($opcao == 5) { //deslogar
     session_start();
     if (isset($_SESSION['cliente'])) {
+        unset($_SESSION['logado']);
+        unset($_SESSION['tipousuario']);
         unset($_SESSION['cliente']);
     }
     header('Location:../views/formClienteLogin.php');
